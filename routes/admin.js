@@ -3,27 +3,27 @@ const express = require('express');
 const { check } = require('express-validator')
 const router = express.Router();
 
-const productsController = require('../controllers/products');
+const adminController = require('../controllers/admin');
 
 // /admin/add-product => GET
-router.get('/', productsController.getSearchProduct);
+router.get('/', adminController.getSearchProduct);
 
-router.get('/insert', productsController.getAddProduct);
+router.get('/insert', adminController.getAddProduct);
 
-router.get('/update/:product_id', productsController.getUpdateProduct);
+router.get('/update/:product_id', adminController.getUpdateProduct);
 
 // /admin/add-product => POST
 router.post('/insert', [
     check('product_name').trim().not().isEmpty().withMessage("product name is required"),
     check('price').isFloat({ gt: 0 }).withMessage("greater than zero")
-], productsController.postAddProduct);
+], adminController.postAddProduct);
 
 router.post('/update', [
     check('product_id').not().isEmpty().withMessage("empty"),
     check('product_name').trim().isLength({ min: 1 }).withMessage("product name is required"),
     check('price').isFloat({ gt: 0 }).withMessage("greater than zero")
-], productsController.postUpdateProduct);
+], adminController.postUpdateProduct);
 
-router.get('/delete/:product_id', productsController.getDeleteProduct);
+router.get('/delete/:product_id', adminController.getDeleteProduct);
 
 exports.routes = router;
