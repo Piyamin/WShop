@@ -21,7 +21,7 @@ exports.getSearchProduct = (req, res, next) => {
 exports.getAddProduct = (req, res, next) => {
     const product_name = '';
     const price = '';
-    res.render('admin/insert', {
+    res.render('products/insert', {
         pageTitle: 'Insert Product',
         errorMessage: null,
         product_name: product_name,
@@ -34,7 +34,7 @@ exports.postAddProduct = (req, res, next) => {
     const { product_name, price } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.render('admin/insert', {
+        res.render('products/insert', {
             pageTitle: 'Insert Product',
             errorMessage: errors.array(),
             product_name: product_name,
@@ -48,7 +48,7 @@ exports.postAddProduct = (req, res, next) => {
         .then(result => {
             // console.log(result);
             console.log('Created Product');
-            res.redirect('/admin');
+            res.redirect('/products');
         })
         .catch(err => {
             console.log(err);
@@ -61,18 +61,21 @@ exports.getUpdateProduct = (req, res, next) => {
     const { product_id } = req.params;
     let product_name = '';
     let price = '';
+    let image ='';
 
     Product.findById(product_id)
         .then(product => {
             console.log(product);
             product_name = product.product_name;
             price = product.price;
+            image = product.product_image;
             res.render('admin/update', {
                 pageTitle: 'Update Product',
                 errorMessage: null,
                 product_id: product_id,
                 product_name: product_name,
-                price: price
+                price: price,
+                image: image
             });
         })
         .catch(err => console.log(err));
@@ -80,7 +83,7 @@ exports.getUpdateProduct = (req, res, next) => {
 
 exports.postUpdateProduct = (req, res, next) => {
     console.log(req.body);
-    const { product_id, product_name, price } = req.body;
+    const { product_id, product_name, price,product_image } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('admin/update', {
@@ -88,11 +91,12 @@ exports.postUpdateProduct = (req, res, next) => {
             errorMessage: errors.array(),
             product_id: product_id,
             product_name: product_name,
-            price: price
+            price: price,
+            image: image
         });
     }
 
-    const product = new Product(product_name, price, new ObjectId(product_id));
+    const product = new Product(product_name, price,new ObjectId(product_id), product_image);
     product
         .save()
         .then(result => {
