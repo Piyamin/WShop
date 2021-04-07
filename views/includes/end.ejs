@@ -123,5 +123,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- Awesome -->
 <script defer src="fontawesome5.15.3/js/all.js"></script> <!--load all styles -->
 
+<!-- script search -->
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
 </body>
 </html>

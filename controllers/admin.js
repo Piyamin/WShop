@@ -8,7 +8,7 @@ exports.getSearchProduct = (req, res, next) => {
 
     Product.fetchAll()
         .then(products => {
-            res.render('products/search', {
+            res.render('admin/search', {
                 pageTitle: 'Search Product',
                 prods: products,
             });
@@ -21,7 +21,7 @@ exports.getSearchProduct = (req, res, next) => {
 exports.getAddProduct = (req, res, next) => {
     const product_name = '';
     const price = '';
-    res.render('products/insert', {
+    res.render('admin/insert', {
         pageTitle: 'Insert Product',
         errorMessage: null,
         product_name: product_name,
@@ -34,7 +34,7 @@ exports.postAddProduct = (req, res, next) => {
     const { product_name, price } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.render('products/insert', {
+        res.render('admin/insert', {
             pageTitle: 'Insert Product',
             errorMessage: errors.array(),
             product_name: product_name,
@@ -48,7 +48,7 @@ exports.postAddProduct = (req, res, next) => {
         .then(result => {
             // console.log(result);
             console.log('Created Product');
-            res.redirect('/products');
+            res.redirect('/admin');
         })
         .catch(err => {
             console.log(err);
@@ -67,7 +67,7 @@ exports.getUpdateProduct = (req, res, next) => {
             console.log(product);
             product_name = product.product_name;
             price = product.price;
-            res.render('products/update', {
+            res.render('admin/update', {
                 pageTitle: 'Update Product',
                 errorMessage: null,
                 product_id: product_id,
@@ -83,7 +83,7 @@ exports.postUpdateProduct = (req, res, next) => {
     const { product_id, product_name, price } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.render('products/update', {
+        res.render('admin/update', {
             pageTitle: 'Update Product',
             errorMessage: errors.array(),
             product_id: product_id,
@@ -97,7 +97,7 @@ exports.postUpdateProduct = (req, res, next) => {
         .save()
         .then(result => {
             console.log('Update Product');
-            res.redirect('/products');
+            res.redirect('/admin');
         })
         .catch(err => console.log(err));
 };
@@ -108,7 +108,7 @@ exports.getDeleteProduct = (req, res, next) => {
     Product.deleteById(product_id)
         .then(() => {
             console.log('Delete Product');
-            res.redirect('/products');
+            res.redirect('/admin');
         })
         .catch(err => console.log(err));
 };
