@@ -33,7 +33,29 @@ exports.getCart = (req, res, next) => {
     });
 }
 exports.getDetail = (req, res, next) => {
-    res.render('user/detail', {
-            pageTitle: 'Detail',
-    });
+    console.log(req.params);
+    const { product_id } = req.params;
+    let product_name = '';
+    let price = '';
+    let product_image ='';
+    let product_detail ='';
+
+    Product.findById(product_id)
+        .then(product => {
+            console.log(product);
+            product_name = product.product_name;
+            price = product.price;
+            product_image = product.product_image;
+            product_detail= product.product_detail;
+            res.render('user/detail', {
+                pageTitle: 'detail Product',
+                errorMessage: null,
+                product_id: product_id,
+                product_name: product_name,
+                price: price,
+                product_image: product_image,
+                product_detail: product_detail
+            });
+        })
+        .catch(err => console.log(err));
 }
