@@ -4,12 +4,12 @@ const mongodb = require('mongodb');
 const Product = require('../models/products');
 const ObjectId = mongodb.ObjectId;
 
-exports.getProduct = (req, res, next) => {
+exports.getShop = (req, res, next) => {
 
     Product.fetchAll()
         .then(products => {
-            res.render('user/home', {
-                pageTitle: 'Home',
+            res.render('user/shop', {
+                pageTitle: 'Shop',
                 prods: products,
             });
         })

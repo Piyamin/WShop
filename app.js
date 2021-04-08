@@ -10,13 +10,15 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const adminRoute = require('./routes/admin');
+const homeRoute = require('./routes/home');
 const userRoute = require('./routes/user');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/",homeRoute.routes);
 app.use(userRoute.routes);
-app.use("/admin", adminRoute.routes);
+app.use(adminRoute.routes);
 
 app.use((req, res, next) => {
     res.status(404).render('404', { pageTitle: 'Page Not Found' });
