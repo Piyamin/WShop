@@ -107,7 +107,7 @@ exports.postUpdateProduct = (req, res, next) => {
         });
     }
 
-    const product = new Product(product_name, price,new ObjectId(product_id), product_image,product_detail);
+    const product = new Product(product_name, price, product_image,product_detail,new ObjectId(product_id));
     product
         .save()
         .then(result => {

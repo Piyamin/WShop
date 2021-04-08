@@ -10,30 +10,32 @@
                     </div>
                     <% } %>
                     <div class="row">
-                        <div class="col-md-6">
-                            <img src="<%- product_image %>" alt="">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="single_product_text text-center">
-                                <h3><%- product_name %></h3>
-                                <p>
-                                    <%- product_detail %>
-                                </p>
-                                <h4><%- price %>฿</h4>
-                                <div class="card_area">  
-                                        <div class="product_count d-inline-block card_area">
-                                            <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                            <input class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                                            <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
-                                        </div>                      
-                                </div>
-                                <br>
-                                <div class="add_to_cart">
-                                    <a href="#" class="btn_3">add to cart</a>
-                                </div>
-                            
+                        <form action="/cart" method="post"></form>
+                            <div class="col-md-6">
+                                <img src="<%- product_image %>" alt="">
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                                <div class="single_product_text text-center">
+                                    <h3><%- product_name %></h3>
+                                    <p>
+                                        <%- product_detail %>
+                                    </p>
+                                    <h4><%- price %>฿</h4>
+                                    <div class="card_area">  
+                                            <div class="product_count d-inline-block card_area">
+                                                <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+                                                <input class="product_count_item input-number" type="text" value="<%- amout %>" min="0" max="10">
+                                                <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                            </div>                      
+                                    </div>
+                                    <br>
+                                    <div class="add_to_cart">
+                                        <button type="submit" class="btn_3">add to cart</button>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </form>
                     </div>
             </div>
         </div>

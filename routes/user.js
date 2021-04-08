@@ -10,7 +10,10 @@ router.get('/shop', userController.getShop);
 
 router.get('/about', userController.getAbout);
 router.get('/contact', userController.getContact);
+
 router.get('/cart', userController.getCart);
 
 router.get('/detail/:product_id', userController.getDetail);
+
+router.post('/cart', userController.postCart);
 exports.routes = router;
